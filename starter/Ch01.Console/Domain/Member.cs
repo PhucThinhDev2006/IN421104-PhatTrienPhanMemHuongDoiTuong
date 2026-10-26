@@ -11,7 +11,14 @@ public class Member
     public string StudentCode  { get; private set; }
     public DateTime JoinedAt  { get; private set; }
     // TODO: constructor PRIVATE tự sinh Id (Guid.NewGuid()) và JoinedAt (DateTime.UtcNow)
-
+    private Member(string name, string email, string studentCode)
+    {
+        Id  = Guid.NewGuid();
+        Name = name;
+        Email = email;
+        StudentCode = studentCode;
+        JoinedAt = DateTime.UtcNow;
+    }
     // TODO: public static Member Create(string name, string email, string studentCode)
     //       → validate: name/studentCode không trống, email chứa '@'; sai thì throw ArgumentException
 
