@@ -12,7 +12,28 @@ public class CheckIn
     public const string QrCode  = "QrCode";
     // TODO: constructor PRIVATE + public static CheckIn Create(Registration registration, string method)
     //       → chỉ cho phép khi registration.Status == Confirmed
+    private CheckIn(Guid registrationId, string method)
+    {
+        Id = Guid.NewGuid();
+        RegistrationId = registrationId;
+        Method = method;
+        CheckedInAt = DateTime.UtcNow;
+    }
 
+    public static CheckIn Create(Registration registration, string method = Manual)
+    {
+        ArgumentNullException.ThrowIfNull(registration);
+        if (registration.Status != Registration.Confirmed)
+        {
+            throw new InvalidOperationException("Chỉ có phiếu đã Confirmed mới được check-in.");
+        }
+
+        if (method is not (Manual or QrCode))
+        {
+            throw new InvalidOperationException($"Hình thức không hợp lệ: {method}");
+        }
+        return new CheckIn(registration.Id, method);
+    }
     // TODO: public string Summary() — chuỗi mô tả để in báo cáo
     public string Sumary() => $"Check-in {CheckedInAt: HH:mm:ss} qua {Method} (phiếu {RegistrationId.ToString()[..8]})";
 }
