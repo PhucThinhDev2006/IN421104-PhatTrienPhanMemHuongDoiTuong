@@ -4,6 +4,10 @@ namespace EduHub.Ch01.Domain;
 public class Club
 {
     // TODO: Guid Id, string Name, string Description, DateTime CreatedAt  (private set)
+    public Guid ID { get; private set; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
+    public DateTime CreateAt { get; private set; }
     // TODO: danh sách thành viên: field private List<Member> + property IReadOnlyList<Member> Members
     //       (bên ngoài không được .Add() trực tiếp — phải đi qua AddMember)
 
