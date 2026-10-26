@@ -55,5 +55,13 @@ var checkIns = new List<CheckIn>
 };
 Console.WriteLine($"\n{checkIns[0].Summary()}");
 // TODO 6: In báo cáo tham dự: số đăng ký, số check-in, danh sách tên
-
+Console.WriteLine($"\n--- BÁO CÁO THAM DỰ SỰ KIỆN ---");
+Console.WriteLine($"Số lượng đăng ký: {registrations.Count}/{workshop.Capacity}");
+Console.WriteLine($"Số lượng đã check-in: {checkIns.Count}");
+var memberById = members.ToDictionary(m => m.Id);
+foreach (var reg in registrations)
+{
+    bool attended = checkIns.Any(c => c.RegistrationId == reg.Id);
+    Console.WriteLine($"- {memberById[reg.MemberId].Name}: {(attended ? "ĐÃ CHECK-IN" : "CHƯA CHECK-IN")}");
+}
 Console.WriteLine("\n✅ Demo complete!");
