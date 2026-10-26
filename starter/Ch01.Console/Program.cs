@@ -49,6 +49,11 @@ foreach (var reg in registrations)
     Console.WriteLine($"Xác nhận phiếu {reg.Id.ToString()[..8]} -> Trạng thái mới: {reg.Status}");
 }
 // TODO 5: 1 Member check-in                               → CheckIn.Create(registration, ...)
+var checkIns = new List<CheckIn>
+{
+    CheckIn.Create(registrations[0], CheckIn.QrCode)
+};
+Console.WriteLine($"\n{checkIns[0].Summary()}");
 // TODO 6: In báo cáo tham dự: số đăng ký, số check-in, danh sách tên
 
 Console.WriteLine("\n✅ Demo complete!");
