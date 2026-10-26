@@ -12,6 +12,33 @@ public class Event
     public bool IsOnline  { get; private set; }
     // TODO: constructor PRIVATE + public static Event Create(Guid clubId, string title, DateTime date, int capacity, bool isOnline = false)
     //       → validate: title không trống, capacity > 0
+    private Event(Guid clubId, string title, DateTime date, int capacity, bool isOnline)
+    {
+        Id = Guid.NewGuid();
+        ClubId = clubId;
+        Title = title;
+        Date = date;
+        Capacity = capacity;
+        IsOnline = isOnline;
+    }
 
+    public static Event Create(Guid clubId, string title, DateTime date, int capacity, bool isOnline = false)
+    {
+        if (clubId == Guid.Empty)
+        {
+            throw new  ArgumentNullException("Sự kiện phải thuộc của một CLB!", nameof(clubId));
+        }
+
+        if (string.IsNullOrEmpty(title))
+        {
+            throw new  ArgumentNullException("Tiêu đề không được trống!", nameof(title));
+        }
+
+        if (capacity <= 0)
+        {
+            throw new  ArgumentException("Sức chứa phải lớn hơn 0!", nameof(capacity));
+        }
+        return new Event(clubId, title.Trim(), date, capacity, isOnline);
+    }
     // TODO: public bool HasCapacity(int registeredCount) — true nếu registeredCount < Capacity
 }
