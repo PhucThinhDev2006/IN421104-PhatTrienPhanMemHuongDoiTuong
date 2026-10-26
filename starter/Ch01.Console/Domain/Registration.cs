@@ -10,7 +10,9 @@ public class Registration
     public DateTime RegisteredAt  { get; private set; }
     public string Status   { get; private set; }
     // TODO: hằng số cho Status: "Pending" / "Confirmed" / "Cancelled" (static class hoặc const) — không dùng magic string
-
+    public const string Pending = "Pending";
+    public const string Confirmed = "Confirmed";
+    public const string Cancelled = "Cancelled";
     // TODO: constructor PRIVATE + public static Registration Create(Guid memberId, Guid eventId)
     //       → Status khởi tạo = Pending
 
