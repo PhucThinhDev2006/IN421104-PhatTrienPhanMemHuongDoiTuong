@@ -10,7 +10,8 @@ public class Club
     public DateTime CreateAt { get; private set; }
     // TODO: danh sách thành viên: field private List<Member> + property IReadOnlyList<Member> Members
     //       (bên ngoài không được .Add() trực tiếp — phải đi qua AddMember)
-
+    private List<Member> _members = [];
+   public IReadOnlyList<Member> Members => _members; 
     // TODO: constructor PRIVATE + public static Club Create(string name, string description)
     // TODO: public void AddMember(Member member) — chặn null và thành viên trùng
     // TODO: public int MemberCount()
