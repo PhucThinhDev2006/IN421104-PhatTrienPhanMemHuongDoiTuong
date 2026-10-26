@@ -41,4 +41,5 @@ public class Event
         return new Event(clubId, title.Trim(), date, capacity, isOnline);
     }
     // TODO: public bool HasCapacity(int registeredCount) — true nếu registeredCount < Capacity
+    public bool HasCapacity(int registeredCount) => registeredCount < Capacity; 
 }
