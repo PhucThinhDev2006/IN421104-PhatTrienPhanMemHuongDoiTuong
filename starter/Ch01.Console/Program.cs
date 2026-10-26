@@ -29,6 +29,25 @@ Console.WriteLine($"Tổng số thành viên trong CLB: {club.MemberCount()}");
 var workshop = Event.Create(club.Id, "Workshop AI", DateTime.Today.AddDays(7).AddHours(14), 50);
 Console.WriteLine($"\nSự kiện: {workshop.Title} — Ngày: {workshop.Date:dd/MM/yyyy HH:mm} — Sức chứa: {workshop.Capacity}");
 // TODO 4: 2 Member đăng ký (kiểm tra HasCapacity) → Pending → gọi Confirm()
+var registrations = new List<Registration>();
+// Lấy 2 thành viên đầu tiên đăng ký
+foreach (var member in members.Take(2))
+{
+    if (!workshop.HasCapacity(registrations.Count))
+    {
+        Console.WriteLine($"Hết chỗ, không nhận đăng ký cho {member}");
+        continue;
+    }
+    var reg = Registration.Create(member.Id, workshop.Id);
+    registrations.Add(reg);
+    Console.WriteLine($"{member.Name} đăng ký thành công -> Trạng thái: {reg.Status}");
+}
+// Duyệt phiếu (Confirm)
+foreach (var reg in registrations)
+{
+    reg.Confirm();
+    Console.WriteLine($"Xác nhận phiếu {reg.Id.ToString()[..8]} -> Trạng thái mới: {reg.Status}");
+}
 // TODO 5: 1 Member check-in                               → CheckIn.Create(registration, ...)
 // TODO 6: In báo cáo tham dự: số đăng ký, số check-in, danh sách tên
 
