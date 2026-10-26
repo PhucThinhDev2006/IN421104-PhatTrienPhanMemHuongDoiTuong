@@ -35,5 +35,5 @@ public class CheckIn
         return new CheckIn(registration.Id, method);
     }
     // TODO: public string Summary() — chuỗi mô tả để in báo cáo
-    public string Sumary() => $"Check-in {CheckedInAt: HH:mm:ss} qua {Method} (phiếu {RegistrationId.ToString()[..8]})";
+    public string Summary() => $"Check-in {CheckedInAt: HH:mm:ss} qua {Method} (phiếu {RegistrationId.ToString()[..8]})";
 }
