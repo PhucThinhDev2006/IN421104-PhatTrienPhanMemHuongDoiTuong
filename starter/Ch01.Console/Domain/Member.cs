@@ -47,5 +47,7 @@ public class Member
         return new Member(name.Trim(), email.Trim().ToLowerInvariant(), studentCode.Trim());
     }
     // TODO: public bool IsActive()  — thể hiện behavior của Member
+    public bool IsActive() => Status  == MemberStatus.Active;
+    public void DesInactive() => Status = MemberStatus.Inactive;
     // TODO: override ToString() → "{Name} ({StudentCode})"
 }
