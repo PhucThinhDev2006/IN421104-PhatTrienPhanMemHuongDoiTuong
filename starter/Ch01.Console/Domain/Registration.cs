@@ -4,6 +4,11 @@ namespace EduHub.Ch01.Domain;
 public class Registration
 {
     // TODO: Guid Id, Guid MemberId, Guid EventId, DateTime RegisteredAt, string Status (private set)
+    public Guid Id  { get; private set; }
+    public Guid MemberId  { get; private set; }
+    public Guid EventId   { get; private set; }
+    public DateTime RegisteredAt  { get; private set; }
+    public string Status   { get; private set; }
     // TODO: hằng số cho Status: "Pending" / "Confirmed" / "Cancelled" (static class hoặc const) — không dùng magic string
 
     // TODO: constructor PRIVATE + public static Registration Create(Guid memberId, Guid eventId)
