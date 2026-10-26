@@ -1,4 +1,10 @@
 namespace EduHub.Ch01.Domain;
+/// <summary>Trạng thái hoạt động của thành viên.</summary>
+public enum MemberStatus 
+{
+    Active,
+    Inactive
+}
 
 /// <summary>Thành viên sinh viên của câu lạc bộ.</summary>
 public class Member
@@ -10,6 +16,7 @@ public class Member
     public string Email  { get; private set; }
     public string StudentCode  { get; private set; }
     public DateTime JoinedAt  { get; private set; }
+    public MemberStatus  Status { get; private set; }
     // TODO: constructor PRIVATE tự sinh Id (Guid.NewGuid()) và JoinedAt (DateTime.UtcNow)
     private Member(string name, string email, string studentCode)
     {
