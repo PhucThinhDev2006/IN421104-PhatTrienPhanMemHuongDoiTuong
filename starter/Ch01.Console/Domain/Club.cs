@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace EduHub.Ch01.Domain;
 
 /// <summary>Câu lạc bộ sinh viên.</summary>
@@ -31,5 +33,15 @@ public class Club
         return new Club(name.Trim(), description.Trim() ?? string.Empty);
     }
     // TODO: public void AddMember(Member member) — chặn null và thành viên trùng
+    public void AddMember(Member member)
+    {
+        ArgumentNullException.ThrowIfNull(member);
+        if (_members.Any(m => m.Id == member.Id))
+        {
+            throw new InvalidOperationException($"{member} đã là thanh viên của {Name}");
+        }
+        _members.Add(member);
+    }
     // TODO: public int MemberCount()
+    public int MemberCount() => _members.Count;
 }
