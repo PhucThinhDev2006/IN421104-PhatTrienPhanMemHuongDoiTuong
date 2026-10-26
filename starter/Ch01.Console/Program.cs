@@ -8,6 +8,8 @@ using EduHub.Ch01.Domain;
 Console.WriteLine("=== EduHub — Club & Event Management ===");
 
 // TODO 1: Tạo CLB "Tech Club" với mô tả phù hợp         → Club.Create(...)
+var club = Club.Create("Tech Club", "Câu lạc bộ công nghệ: workshop, hackathon, chia sẻ kiến thức.");
+Console.WriteLine($"\nCLB vừa tạo: {club.Name} — {club.Description}");
 // TODO 2: Tạo 3 Member, thêm vào CLB                      → Member.Create(...), club.AddMember(...)
 // TODO 3: Tạo sự kiện "Workshop AI", capacity = 50        → Event.Create(club.Id, ...)
 // TODO 4: 2 Member đăng ký (kiểm tra HasCapacity) → Pending → gọi Confirm()
