@@ -26,6 +26,8 @@ foreach (var member in members)
 }
 Console.WriteLine($"Tổng số thành viên trong CLB: {club.MemberCount()}");
 // TODO 3: Tạo sự kiện "Workshop AI", capacity = 50        → Event.Create(club.Id, ...)
+var workshop = Event.Create(club.Id, "Workshop AI", DateTime.Today.AddDays(7).AddHours(14), 50);
+Console.WriteLine($"\nSự kiện: {workshop.Title} — Ngày: {workshop.Date:dd/MM/yyyy HH:mm} — Sức chứa: {workshop.Capacity}");
 // TODO 4: 2 Member đăng ký (kiểm tra HasCapacity) → Pending → gọi Confirm()
 // TODO 5: 1 Member check-in                               → CheckIn.Create(registration, ...)
 // TODO 6: In báo cáo tham dự: số đăng ký, số check-in, danh sách tên
