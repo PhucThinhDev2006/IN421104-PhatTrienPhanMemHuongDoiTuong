@@ -21,7 +21,24 @@ public class Member
     }
     // TODO: public static Member Create(string name, string email, string studentCode)
     //       → validate: name/studentCode không trống, email chứa '@'; sai thì throw ArgumentException
+    public static Member Create(string name, string email, string studentCode)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentNullException("Tên trống!",  nameof(name));
+        }
 
+        if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
+        {
+            throw new ArgumentException("Email sai định dạng!",   nameof(email));
+        }
+
+        if (string.IsNullOrWhiteSpace(studentCode))
+        {
+            throw new ArgumentException("MSSV không được trống!",   nameof(studentCode));
+        }
+        return new Member(name.Trim(), email.Trim().ToLowerInvariant(), studentCode.Trim());
+    }
     // TODO: public bool IsActive()  — thể hiện behavior của Member
     // TODO: override ToString() → "{Name} ({StudentCode})"
 }
