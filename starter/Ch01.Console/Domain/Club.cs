@@ -13,6 +13,23 @@ public class Club
     private List<Member> _members = [];
    public IReadOnlyList<Member> Members => _members; 
     // TODO: constructor PRIVATE + public static Club Create(string name, string description)
+    private Club(string name, string description)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+        Description = description;
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    public static Club Create(string name, string description)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        return new Club(name.Trim(), description.Trim() ?? string.Empty);
+    }
     // TODO: public void AddMember(Member member) — chặn null và thành viên trùng
     // TODO: public int MemberCount()
 }
