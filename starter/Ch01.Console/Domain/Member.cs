@@ -50,4 +50,5 @@ public class Member
     public bool IsActive() => Status  == MemberStatus.Active;
     public void DesInactive() => Status = MemberStatus.Inactive;
     // TODO: override ToString() → "{Name} ({StudentCode})"
+    public override  string ToString() => $"{Name} {StudentCode}";
 }
