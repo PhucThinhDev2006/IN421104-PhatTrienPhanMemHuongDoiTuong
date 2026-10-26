@@ -4,7 +4,12 @@ namespace EduHub.Ch01.Domain;
 public class Event
 {
     // TODO: Guid Id, Guid ClubId, string Title, DateTime Date, int Capacity, bool IsOnline (private set)
-
+    public Guid Id { get; private set; }
+    public Guid ClubId { get; private set; }
+    public string Title { get; private set; }
+    public DateTime Date  { get; private set; }
+    public int Capacity { get; private set; }
+    public bool IsOnline  { get; private set; }
     // TODO: constructor PRIVATE + public static Event Create(Guid clubId, string title, DateTime date, int capacity, bool isOnline = false)
     //       → validate: title không trống, capacity > 0
 
