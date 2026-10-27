@@ -3,129 +3,44 @@
 > **Học phần:** IN4211 — Phát triển phần mềm hướng đối tượng  
 > **Giảng viên hướng dẫn:** ThS. Nguyễn Tuấn Kiệt  
 > **Sinh viên thực hiện:** Nguyễn Huỳnh Phúc Thịnh  
-> **Mã số sinh viên:** 0024417329  
-> **Bài tập:** Chương 1 — Phân tích yêu cầu và Domain Modeling EduHub (Đánh giá HĐ 1.3)  
+> **Mã số sinh viên:** `0024417329`  
+> **Năm học:** 2026 – 2027  
 
 ---
 
-## 📌 1. Giới thiệu bài tập
+## 📚 Giới thiệu học phần
 
-Dự án **EduHub** là hệ thống quản lý câu lạc bộ và sự kiện sinh viên. Bài tập Chương 1 tập trung vào việc mô hình hóa miền bài toán (Domain Modeling) theo tư duy hướng đối tượng hiện đại và các nguyên tắc thiết kế sạch (Clean OOP):
+Kho lưu trữ này dùng để quản lý toàn bộ mã nguồn, tài liệu thiết kế kiến trúc và các bài tập thực hành của học phần **Phát triển phần mềm hướng đối tượng (IN4211)** trên nền tảng **.NET 10**.
 
-* **Tính đóng gói (Encapsulation):** Toàn bộ thuộc tính sử dụng `private set`, constructor để `private` ngăn chặn việc khởi tạo tùy tiện từ bên ngoài.
-* **Mẫu khởi tạo Factory Method:** Sử dụng phương thức tĩnh `Create(...)` kiểm tra chặt chẽ tính hợp lệ (Validation) ngay từ cổng vào, đảm bảo không bao giờ tồn tại thực thể ở trạng thái lỗi.
-* **Bảo vệ bất biến (Invariants):** Danh sách thành viên trong `Club` được bao bọc dưới dạng `IReadOnlyList<Member>`, chỉ có thể thêm mới thông qua phương thức nghiệp vụ `AddMember(...)` để chống trùng lặp.
-* **Máy trạng thái (State Machine):** Phiếu đăng ký `Registration` kiểm soát luồng trạng thái chặt chẽ: `Pending` -> `Confirmed` -> `Cancelled` (trạng thái hủy là cuối cùng, không thể kích hoạt lại).
-* **Quy tắc điểm danh:** Thực thể `CheckIn` chỉ cho phép tạo khi phiếu đăng ký đã ở trạng thái `Confirmed`.
-
----
-
-## 🏛 2. Sơ đồ lớp (Class Diagram)
-
-```mermaid
-classDiagram
-    class Club {
-        +Guid Id
-        +string Name
-        +string Description
-        +DateTime CreatedAt
-        +IReadOnlyList~Member~ Members
-        +AddMember(Member)
-        +MemberCount() int
-    }
-    class Member {
-        +Guid Id
-        +string Name
-        +string Email
-        +string StudentCode
-        +DateTime JoinedAt
-        +bool IsActive()
-        +ToString() string
-    }
-    class Event {
-        +Guid Id
-        +Guid ClubId
-        +string Title
-        +DateTime Date
-        +int Capacity
-        +bool IsOnline
-        +HasCapacity(int) bool
-    }
-    class Registration {
-        +Guid Id
-        +Guid MemberId
-        +Guid EventId
-        +DateTime RegisteredAt
-        +string Status
-        +Confirm()
-        +Cancel()
-    }
-    class CheckIn {
-        +Guid Id
-        +Guid RegistrationId
-        +DateTime CheckedInAt
-        +string Method
-        +Summary() string
-    }
-
-    Club "*" -- "*" Member : chứa thành viên
-    Club "1" --> "*" Event : tổ chức
-    Member "1" --> "*" Registration : đăng ký
-    Event "1" --> "*" Registration : tiếp nhận
-    Registration "1" --> "0..1" CheckIn : điểm danh
-```
+Học phần hướng đến việc áp dụng các tiêu chuẩn công nghiệp hiện đại:
+* **Kiến trúc phần mềm:** Clean Architecture (4 lớp), Domain-Driven Design (DDD).
+* **Nguyên lý & Mẫu thiết kế:** SOLID Principles, GoF Design Patterns (Factory, Decorator, Strategy, Observer,...).
+* **Xây dựng RESTful API:** ASP.NET Core, OpenAPI / Swagger UI, chuẩn hóa HTTP Status Code.
+* **Cơ sở dữ liệu:** Entity Framework Core, PostgreSQL, Dapper.
+* **Kiểm thử & Tự động hóa:** Unit Testing (xUnit, Moq), đóng gói Docker, CI/CD với GitHub Actions.
+* **Quy trình quản lý mã nguồn:** Git, GitHub, quy ước Conventional Commits, quy trình nhóm Rebase & Pull Request.
 
 ---
 
-## 🚀 3. Hướng dẫn chạy chương trình
+## 🗺 Mục lục bài tập các chương
 
-### Yêu cầu môi trường:
-* .NET SDK 10.0 (hoặc .NET 8.0/9.0)
+Dưới đây là danh sách các bài tập và dự án thực hành theo từng chương trong học phần:
 
-### Câu lệnh thực thi:
-Tại thư mục gốc của dự án, mở Terminal và chạy:
-
-```bash
-dotnet run --project starter/Ch01.Console/Ch01.Console.csproj
-```
-
----
-
-## 📊 4. Kết quả thực thi thực tế (Console Output)
-
-Chương trình thực hiện tuần tự và hoàn thành đầy đủ luồng demo nghiệp vụ:
-
-```text
-=== EduHub — Club & Event Management ===
-
-CLB vừa tạo: Tech Club — Câu lạc bộ công nghệ: workshop, hackathon, chia sẻ kiến thức.
-+ Đã thêm: Nguyễn Văn An DH24001
-+ Đã thêm: Trần Thị Bình DH24002
-+ Đã thêm: Lê Hoàng Cường DH24003
-Tổng số thành viên trong CLB: 3
-
-Sự kiện: Workshop AI — Ngày: 02/11/2026 14:00 — Sức chứa: 50
-Nguyễn Văn An đăng ký thành công -> Trạng thái: Pending
-Trần Thị Bình đăng ký thành công -> Trạng thái: Pending
-Xác nhận phiếu cb43f3d0 -> Trạng thái mới: Confirmed
-Xác nhận phiếu f78cc2c8 -> Trạng thái mới: Confirmed
-
-Check-in 16:52:57 qua QrCode (phiếu cb43f3d0)
-
---- BÁO CÁO THAM DỰ SỰ KIỆN ---
-Số lượng đăng ký: 2/50
-Số lượng đã check-in: 1
-- Nguyễn Văn An: ĐÃ CHECK-IN
-- Trần Thị Bình: CHƯA CHECK-IN
-
-✅ Demo complete!
-```
+| Thư mục | Nội dung trọng tâm | Trạng thái | Xem chi tiết |
+| :---: | :--- | :---: | :---: |
+| **`Ch01/`** | Giới thiệu, OOP cơ bản, Phân tích yêu cầu & Domain Modeling EduHub | Hoàn thành ✅ | [👉 Xem chi tiết Chương 1](./Ch01/README.md) |
+| **`Ch02/`** | SOLID, Design Patterns, Unit Test Domain, Git Rebase & Code Review | Đang học ⏳ | *Đang cập nhật* |
+| **`Ch03/`** | Khung Clean Architecture 4 lớp, DI Container, REST API & Swagger | Chuẩn bị ⏳ | *Đang cập nhật* |
+| **`Ch04/`** | Entity Framework Core, PostgreSQL, Dapper, Repository & Unit of Work | Sắp tới 📅 | *Đang cập nhật* |
+| **`Ch05/`** | Bảo mật API: JWT, Argon2id, Phân quyền người dùng, OWASP | Sắp tới 📅 | *Đang cập nhật* |
+| **`Ch06/`** | Kiểm thử nâng cao, Container hóa Docker, GitHub Actions CI/CD | Sắp tới 📅 | *Đang cập nhật* |
 
 ---
 
-## 🌿 5. Quy trình làm việc với Git & GitHub
+## 🛠 Công nghệ & Công cụ sử dụng
 
-Dự án tuân thủ nghiêm ngặt chuẩn quản lý mã nguồn của môn học:
-* **Nhánh làm bài tập:** `ch01/0024417329` tách từ `main`.
-* **Quy ước Commit:** Tuân thủ 100% chuẩn **Conventional Commits** (`type(scope): subject`).
-* **Pull Request:** Mở Pull Request về nhánh `main` với đầy đủ 3 phần mô tả: `What`, `Why`, `How to test`.
+* **Ngôn ngữ lập trình:** C# 13 (.NET 10 SDK)
+* **IDE & Editors:** JetBrains Rider / Visual Studio 2026 / Visual Studio Code
+* **Quản lý mã nguồn:** Git CLI & GitHub Desktop
+* **Quy ước Commit:** [Conventional Commits](https://www.conventionalcommits.org/) (`type(scope): subject`)
+* **Quy trình gộp mã nguồn:** Branching $\rightarrow$ Rebase on `main` $\rightarrow$ Pull Request $\rightarrow$ Code Review
