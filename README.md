@@ -1,8 +1,11 @@
 # IN4211 — Phát Triển Phần Mềm Hướng Đối Tượng
 
+> **Trường:** Đại học Đồng Tháp
+> **Khoa:** Công nghệ và kỹ thuật
 > **Học phần:** IN4211 — Phát triển phần mềm hướng đối tượng  
 > **Giảng viên hướng dẫn:** ThS. Nguyễn Tuấn Kiệt  
-> **Sinh viên thực hiện:** Nguyễn Huỳnh Phúc Thịnh  
+> **Sinh viên thực hiện:** Nguyễn Huỳnh Phúc Thịnh
+> **Lớp:** ĐHCNTT24B-IT
 > **Mã số sinh viên:** `0024417329`  
 > **Năm học:** 2026 – 2027  
 
